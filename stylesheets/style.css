@@ -451,7 +451,7 @@ option:first-of-type {
   
   .container {
     border-radius: 5px;
-    display: flex;
+    
     padding: 20px;
   }
   

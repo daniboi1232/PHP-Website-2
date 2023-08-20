@@ -13,15 +13,15 @@
 require "connect.inc";
 include "nav.php";
 
-
 ?>
 
 <br> <h1>Insert Trap Information to Add Into Database</h1> <br>
 
 <?php
-include "insertnew.php";
 
+include "insertnew.php";
 include "footer.php";
+
 ?>
 </body>
 </html>

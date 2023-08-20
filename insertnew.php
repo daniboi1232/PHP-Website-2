@@ -1,16 +1,64 @@
 <?php
+include "connect.inc";
 
-include "connect.inc"
+
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $markernumber = trim($_POST['markernumber']);
+    $traploc = trim($_POST['traploc']);
+    $region = trim($_POST['region']);
+    $park = trim($_POST['park']);
+    $bait = trim($_POST['bait']);
+    $notes = trim($_POST['notes']);
+    
+   
+
+    //write a block checking if there is a trapline for the area and if not then insert the location
+    $qry1 = "SELECT * FROM trap WHERE marker_number = '$markernumber'";
+    //var_dump($conn);
+    //broken here - not getting through the next command
+    $result = mysqli_query($conn,$qry1);
+    
+    if (isset($result)) { if (mysqli_num_rows($result) > 0) {
+         echo 'found! ';
+         
+    } 
+    echo 'notfound';
+    }
+    else { 
+        echo 'not found';
+        
+    }
+
+    
+    $qry="SELECT * FROM location WHERE $region == `region` AND $park == `park`";
+    $r = @mysqli_fetch_assoc($conn,$qry);
+    echo $r;
+    
+
+    //inserts into the database
+    //$q = "INSERT INTO `trap`(`idtrap`,`marker_number`, `trap_loc`, `trap_notes`,``,``) 
+    //VALUES (NULL,'$markernumber','$traploc','$notes','$bait','$',,'$vaccine')";
+    //echo $query;
+    //$result = @mysqli_query($conn, $q);
+    //var_dump($result);
+    //if ($result) { //if it ran ok
+        //echo "Thank you for inserting your pet's information";
+
+
+    //} else {
+        //public message
+        //echo "Request Unsuccessful";
+}
+
 
 
 
 ?>
 
 
-
-
 <div class="container">
-  <form action="tester.php">
+  <form action="insertnewtrap.php" method="POST">
   <div class="row">
     <div class="col-25">
       <label for="markernumber">Marker Number:</label>
@@ -29,10 +77,10 @@ include "connect.inc"
   </div>
   <div class="row">
     <div class="col-25">
-      <label for="trapregion">Trap Line Region:</label>
+      <label for="region">Trap Line Region:</label>
     </div>
     <div class="col-75">
-      <select  name="trapregion">
+      <select  name="region">
         <option value="" disabled selected>Select A Region</option>
 <?php  
     $query= "SELECT * FROM `location`";
@@ -58,7 +106,7 @@ include "connect.inc"
       <label for="trapregion">Trap Line Park:</label>
     </div>
     <div class="col-75">
-      <select  name="trappark">
+      <select  name="park">
         <option value="" disabled selected>Select A Park</option>
 <?php  
     $query= "SELECT * FROM `location`";
@@ -120,61 +168,6 @@ include "connect.inc"
   </div>
   </form>
 </div>
-
-<?php
-
-
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $markernumber = trim($_POST['markernumber']);
-    $traploc = trim($_POST['traploc']);
-    $trapregion = trim($_POST['trapregion']);
-    $trappark = trim($_POST['trappark']);
-    $bait = trim($_POST['bait']);
-    $notes = trim($_POST['notes']);
-    
-    
-
-    //write a block checking if there is a trapline for the area and if not then insert the location
-    //$qr1="SELECT markernumber FROM trap";
-    $qry1 = "SELECT * FROM trap WHERE markernumber = '$markernumber'"; 
-    $result = @mysqli_query($conn,$qry1); 
-    if ($result) { if (mysqli_fetch_assoc($result) > 0) {
-         echo 'found! '; 
-    } 
-    else { 
-        echo 'not found'; 
-    } } 
-    else { 
-        echo 'Error: ' ; 
-    }
-
-
-
-
-    //$qry="SELECT * FROM  WHERE idTeam='$team";
-    //inserts into the database
-    //$q = "INSERT INTO `trap`(`idtrap`,`marker_number`, `trap_loc`, `trap_notes`,``,``) 
-    //VALUES (NULL,'$markernumber','$traploc','$notes','$bait','$',,'$vaccine')";
-    //echo $query;
-    //$result = @mysqli_query($conn, $q);
-    //var_dump($result);
-    //if ($result) { //if it ran ok
-        //echo "Thank you for inserting your pet's information";
-
-
-    //} else {
-        //public message
-        //echo "Request Unsuccessful";
-
-    
-}
-
-
-
-
-?>
-
 
 
 
