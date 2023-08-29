@@ -43,3 +43,68 @@ while ($row = mysqli_fetch_assoc($r)) {
 ?>
     </tbody>
 </table>
+
+
+<!-- WRITE SECTION TO INSERT INTO BAIT TABLE -->
+
+<!--  PHP for the form  -->
+<?php
+include "connect.inc";
+
+if (isset($_POST['submit'])) {
+
+  //echo 'hello world';
+  if (empty($_POST['newregion'] || $_POST['newpark'])){
+    echo 'Required fields are empty';
+  } else {
+    $newregion = trim($_POST['newregion']);
+    $newpark = trim($_POST['newpark']);
+    //var_dump($newbait);
+    //echo $newtarget;
+    $qry = "INSERT INTO `location`(`region`, `park`) VALUES ('$newregion','$newpark')";
+    $r = mysqli_query($conn,$qry);
+    mysqli_close($conn);
+    echo '<b>your location is inserted :)<b>';
+    
+    //tried to redirect so that the bait page will not enter any more
+    header("Location: index.php");
+    exit;
+
+
+  }
+}
+?>
+<!-- End of PHP and Start of HTML Form-->
+<br>
+<div class="container">
+  <form action="location.php" method="POST">
+  <div class="row">
+    <div class="insert-col-25">
+      <label for="newregion">Region</label>
+    </div>
+    <div class="insert-col-75">
+      <input type="text" name="newregion" placeholder="Region" value="" onfocus="this.value=''">
+    </div>
+  </div>
+  <br><br><br>
+  <div class="row">
+    <div class="insert-col-25">
+      <label for="newpark">Park</label>
+    </div>
+    <div class="insert-col-75">
+      <input type="text" name="newpark" value="" placeholder="Park" onfocus="this.value=''">
+    </div>
+  </div>
+  <div class="row">
+    <input type="submit" value="Submit" name="submit">
+  </div>
+  </form>
+</div>
+
+
+
+
+
+<!-- END OF BAIT INSERT -->
+
+

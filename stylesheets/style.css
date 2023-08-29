@@ -467,12 +467,12 @@ input[type=checkbox] {
     margin-top: 6px;
   }
 
-  /* Bait insert form style */
-  .bait-col-75 {
+  /* Bait and Location insert form style */
+  .insert-col-75 {
     float: left;
     width: 50%;
   }
-  .bait-col-25 {
+  .insert-col-25 {
     float: left;
     width: 5%;
     margin-left: 15px;

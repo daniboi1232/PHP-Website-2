@@ -53,41 +53,52 @@ while ($row = mysqli_fetch_assoc($r)){
 <?php
 include "connect.inc";
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-  echo 'hello world';
-  $newbait = trim($_POST['newbait']);
-  $newtarget = trim($_POST['newtarget']);
-  var_dump($newbait);
-  echo $newtarget;
-  $qry = "INSERT INTO `bait`(`bait`, `target`) VALUES ('$newbait','$newtarget')";
+if (isset($_POST['submit'])) {
 
-  $r = mysqli_query($conn,$qry);
-  echo 'your bait is inserted :)';
+  //echo 'hello world';
+  if (empty($_POST['newbait'] || $_POST['newtarget'])){
+    echo 'Required fields are empty';
+  } else {
+    $newbait = trim($_POST['newbait']);
+    $newtarget = trim($_POST['newtarget']);
+    //var_dump($newbait);
+    //echo $newtarget;
+    $qry = "INSERT INTO `bait`(`bait`, `target`) VALUES ('$newbait','$newtarget')";
+    $r = mysqli_query($conn,$qry);
+    mysqli_close($conn);
+    echo '<b>your bait is inserted :)<b>';
+    
+    //tried to redirect so that the bait page will not enter any more
+    header("Location: index.php");
+    exit;
+
+
+  }
 }
 ?>
 <!-- End of PHP and Start of HTML Form-->
 <br>
 <div class="container">
-  <form action="bait.php">
+  <form action="bait.php" method="POST">
   <div class="row">
-    <div class="bait-col-25">
+    <div class="insert-col-25">
       <label for="newbait">Bait</label>
     </div>
-    <div class="bait-col-75">
-      <input type="text" name="newbait" placeholder="Bait" value="<?php if (isset($_POST['newbait'])) echo $_POST['newbait']; ?>">
+    <div class="insert-col-75">
+      <input type="text" name="newbait" placeholder="Bait" value="" onfocus="this.value=''">
     </div>
   </div>
   <br><br><br>
   <div class="row">
-    <div class="bait-col-25">
+    <div class="insert-col-25">
       <label for="newtarget">Bait Target</label>
     </div>
-    <div class="bait-col-75">
-      <input type="text" name="newtarget" value="<?php if (isset($_POST['newtarget'])) echo $_POST['newtarget']; ?>" placeholder="Bait Target">
+    <div class="insert-col-75">
+      <input type="text" name="newtarget" value="" placeholder="Bait Target" onfocus="this.value=''">
     </div>
   </div>
   <div class="row">
-    <input type="submit" value="Submit">
+    <input type="submit" value="Submit" name="submit">
   </div>
   </form>
 </div>
