@@ -1,3 +1,40 @@
+<!-- WRITE SECTION TO INSERT INTO BAIT TABLE -->
+<!--  PHP for the form  -->
+<?php
+include "connect.inc";
+
+if (isset($_POST['submit'])) {
+
+  //echo 'hello world';
+  if (empty($_POST['newregion'] || $_POST['newpark'])){
+    echo 'Required fields are empty';
+  } else {
+    $newregion = trim($_POST['newregion']);
+    $newpark = trim($_POST['newpark']);
+    //var_dump($newbait);
+    //echo $newtarget;
+    $qry = "SELECT * FROM `location` WHERE region LIKE '$newregion'";
+    $result = mysqli_query($conn,$qry);
+    if (isset($result)) { if (mysqli_num_rows($result) > 0) {
+          echo 'This Bait is Already entered';
+          
+    }
+    else{
+        $qry = "INSERT INTO `location`(`region`, `park`) VALUES ('$newregion','$newpark')";
+        $r = mysqli_query($conn,$qry);
+        mysqli_close($conn);
+        echo '<b>your location is inserted :)<b>';
+
+        //tried to redirect so that the bait page will not enter any more
+        header("Location: location.php");
+        exit;
+    }
+
+
+  }
+}}
+?>
+
 <!-- Table of Results for locations -->
 
 <table class="table_style">
@@ -45,43 +82,6 @@ while ($row = mysqli_fetch_assoc($r)) {
 </table>
 
 
-<!-- WRITE SECTION TO INSERT INTO BAIT TABLE -->
-
-<!--  PHP for the form  -->
-<?php
-include "connect.inc";
-
-if (isset($_POST['submit'])) {
-
-  //echo 'hello world';
-  if (empty($_POST['newregion'] || $_POST['newpark'])){
-    echo 'Required fields are empty';
-  } else {
-    $newregion = trim($_POST['newregion']);
-    $newpark = trim($_POST['newpark']);
-    //var_dump($newbait);
-    //echo $newtarget;
-    $qry = "SELECT * FROM `location` WHERE region LIKE '$newregion'";
-    $result = mysqli_query($conn,$qry);
-    if (isset($result)) { if (mysqli_num_rows($result) > 0) {
-          echo 'This Bait is Already entered';
-          
-    }
-    else{
-        $qry = "INSERT INTO `location`(`region`, `park`) VALUES ('$newregion','$newpark')";
-        $r = mysqli_query($conn,$qry);
-        mysqli_close($conn);
-        echo '<b>your location is inserted :)<b>';
-
-        //tried to redirect so that the bait page will not enter any more
-        header("Location: index.php");
-        exit;
-    }
-
-
-  }
-}}
-?>
 <!-- End of PHP and Start of HTML Form-->
 <br>
 <div class="container">
