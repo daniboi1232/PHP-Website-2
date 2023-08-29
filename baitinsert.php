@@ -48,32 +48,50 @@ while ($row = mysqli_fetch_assoc($r)){
 
 
 <!-- WRITE SECTION TO INSERT INTO BAIT TABLE -->
+
+<!--  PHP for the form  -->
+<?php
+include "connect.inc";
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+  echo 'hello world';
+  $newbait = trim($_POST['newbait']);
+  $newtarget = trim($_POST['newtarget']);
+  var_dump($newbait);
+  echo $newtarget;
+  $qry = "INSERT INTO `bait`(`bait`, `target`) VALUES ('$newbait','$newtarget')";
+
+  $r = mysqli_query($conn,$qry);
+  echo 'your bait is inserted :)';
+}
+?>
+<!-- End of PHP and Start of HTML Form-->
 <br>
 <div class="container">
-  <form action="reciever.php">
+  <form action="bait.php">
   <div class="row">
-    <div class="col-25">
-      <label for="bait">Bait</label>
+    <div class="bait-col-25">
+      <label for="newbait">Bait</label>
     </div>
-    <div class="col-75">
-      <input type="text" name="bait" placeholder="Bait" value="<?php if (isset($_POST['bait'])) echo $_POST['bait']; ?>">
+    <div class="bait-col-75">
+      <input type="text" name="newbait" placeholder="Bait" value="<?php if (isset($_POST['newbait'])) echo $_POST['newbait']; ?>">
     </div>
   </div>
+  <br><br><br>
   <div class="row">
-    <div class="col-25">
-      <label for="target">Bait Target</label>
+    <div class="bait-col-25">
+      <label for="newtarget">Bait Target</label>
     </div>
-    <div class="col-75">
-      <input type="text" name="target" value="<?php if (isset($_POST['target'])) echo $_POST['target']; ?>" placeholder="Bait Target">
+    <div class="bait-col-75">
+      <input type="text" name="newtarget" value="<?php if (isset($_POST['newtarget'])) echo $_POST['newtarget']; ?>" placeholder="Bait Target">
     </div>
   </div>
-  
-  
   <div class="row">
     <input type="submit" value="Submit">
   </div>
   </form>
 </div>
+
 
 
 

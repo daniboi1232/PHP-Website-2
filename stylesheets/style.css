@@ -155,8 +155,8 @@ input[type=checkbox] {
 
 
 
-/*   INSERT TRAP   */
-option:first-of-type {
+/*   INSERT TRAP --- This CSS has been replaced by 'Insert Page CSS' through adjustment of design */
+/*option:first-of-type {
   color: #9e9e9e;
 }
   .notes{
@@ -239,7 +239,7 @@ option:first-of-type {
   color: rgb(190, 7, 162);
   background-color: transparent;
   text-decoration: none;
-}
+}*/
 
 /*  SEARCH BAR  */
 .searchbar {
@@ -417,7 +417,7 @@ option:first-of-type {
 
 
 
-  /*  TESTERPAGE CSS  */
+  /*  Insert Page Css  */
   * {
     box-sizing: border-box;
   }
@@ -462,15 +462,27 @@ option:first-of-type {
   }
   
   .col-75 {
-    float:left;
+    float: left;
     width: 75%;
     margin-top: 6px;
   }
+
+  /* Bait insert form style */
+  .bait-col-75 {
+    float: left;
+    width: 50%;
+  }
+  .bait-col-25 {
+    float: left;
+    width: 5%;
+    margin-left: 15px;
+  }
+
   
   /* Clear floats after the columns */
   .row::after {
     content: "";
-    display: table;
+    /*display: table;*/
     clear: both;
   }
   
@@ -481,4 +493,5 @@ option:first-of-type {
       margin-top: 0;
     }
   }
+
 

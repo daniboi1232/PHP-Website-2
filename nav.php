@@ -26,7 +26,6 @@
             
             <li><a href="insertnewtrap.php">Insert New Trap</a></li>
             <li><a href="searchtrap.php">Search For Trap</a></li>
-            <li><a href="tester.php">testpage 1</a></li>
             <li><a href="bait.php">Bait Types</a></li>
             <li><a href="location.php">Locations</a></li>
           </ul>

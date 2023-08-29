@@ -7,16 +7,45 @@
 -->
 
 
+<!-- PHP for Search Box -->
+<?php
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $search = trim($_POST['search']);
+    $qry = "SELECT idlocation FROM `location` WHERE park LIKE '$search%'";
+    $r1 = mysqli_query($conn,$qry);
+    $row = mysqli_fetch_assoc($r1);
+    $qry2 = "SELECT
+    marker_number,
+    trap_loc,
+    trap_notes,
+    bait.bait,
+    `location`.park,
+    `location`.region
+    FROM
+    trap
+    INNER JOIN
+    bait ON trap.bait_idbait = bait.idbait
+    INNER JOIN
+    `location` ON trap.location_idlocation = `location`.idlocation
+    WHERE idlocation == '$location'";
+}
+
+
+?>
+
+
 <!-- Search Box -->
 
 <div class="searchbar">
   <div class="search-container">
     <form action="searchtrap.php">
-      <input type="text" placeholder="Search Trap Type" name="search">
+      <!-- <input type="text" placeholder="Search Trap Type" name="search"> -->
+      <input type="text" name="search1" placeholder="Search Trap Type" value="<?php if (isset($_POST['search1'])) echo $_POST['search1']; ?>">
       <button type="submit"><i class="fa fa-search"></i>Search</button>
     </form>
   </div>
 </div>
+
 <br>
 
 <!-- Filter Bar -->
@@ -56,11 +85,12 @@ bait.bait,
 `location`.park,
 `location`.region
 FROM
-trap
+trap 
 INNER JOIN
 bait ON trap.bait_idbait = bait.idbait
 INNER JOIN
-`location` ON trap.location_idlocation = `location`.idlocation";
+`location` ON trap.location_idlocation = `location`.idlocation
+ORDER BY `location`.park ASC";
 
 
 $r=mysqli_query ($conn,$query);

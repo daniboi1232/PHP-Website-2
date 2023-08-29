@@ -1,4 +1,6 @@
 <?php
+
+
 include "connect.inc";
 
 
@@ -42,11 +44,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         //$qry3 = "SELECT `idlocation` FROM `location` WHERE `park"
         //echo reset($row);
         $idlocation = reset($row);
-        $qry3 = "INSERT INTO `trap`(`marker_number`, `trap_loc`, `trap_notes`, `location_idlocation`, `bait_idbait`, `user_iduser`) VALUES ('$markernumber','$traploc','$notes','$idlocation','$bait','1')";
-        echo $qry3;
+        $qry3 = "INSERT INTO `trap`(`marker_number`, `trap_loc`, `trap_notes`, `location_idlocation`, `bait_idbait`, `user_iduser`) 
+        VALUES ('$markernumber','$traploc','$notes','$idlocation','$bait','1')";
+        //echo $qry3;
         $r3 = mysqli_query($conn,$qry3);
-        var_dump($r3);
-        echo $r3;
+        //var_dump($r3);
+        //echo $r3;
+        echo "<b>Trap Has Been Successfully Inserted<b>";
       }
       else {
         echo '<b>Please Select A the Region which Matches the Park<b>';
