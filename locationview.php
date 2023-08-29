@@ -61,18 +61,26 @@ if (isset($_POST['submit'])) {
     $newpark = trim($_POST['newpark']);
     //var_dump($newbait);
     //echo $newtarget;
-    $qry = "INSERT INTO `location`(`region`, `park`) VALUES ('$newregion','$newpark')";
-    $r = mysqli_query($conn,$qry);
-    mysqli_close($conn);
-    echo '<b>your location is inserted :)<b>';
-    
-    //tried to redirect so that the bait page will not enter any more
-    header("Location: index.php");
-    exit;
+    $qry = "SELECT * FROM `location` WHERE region LIKE '$newregion'";
+    $result = mysqli_query($conn,$qry);
+    if (isset($result)) { if (mysqli_num_rows($result) > 0) {
+          echo 'This Bait is Already entered';
+          
+    }
+    else{
+        $qry = "INSERT INTO `location`(`region`, `park`) VALUES ('$newregion','$newpark')";
+        $r = mysqli_query($conn,$qry);
+        mysqli_close($conn);
+        echo '<b>your location is inserted :)<b>';
+
+        //tried to redirect so that the bait page will not enter any more
+        header("Location: index.php");
+        exit;
+    }
 
 
   }
-}
+}}
 ?>
 <!-- End of PHP and Start of HTML Form-->
 <br>
