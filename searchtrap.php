@@ -13,12 +13,6 @@
 require "connect.inc";
 include "nav.php";
 
-
-?>
-
-<br> <h1>This is the trap Search page</h1> <br>
-
-<?php
 include "searchtrapinclude.php";
 include "footer.php";
 ?>

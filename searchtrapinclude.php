@@ -9,11 +9,17 @@
 
 <!-- PHP for Search Box -->
 <?php
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $search = trim($_POST['search']);
-    $qry = "SELECT idlocation FROM `location` WHERE park LIKE '$search%'";
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+    $search1 = trim($_POST['search']);
+    $qry = "SELECT idlocation FROM `location` WHERE park LIKE '$search1%'";
     $r1 = mysqli_query($conn,$qry);
     $row = mysqli_fetch_assoc($r1);
+    $idlocation = reset($row);
+    echo $row[0];
+    echo $idlocation;
+
+    //echo $row;
     $qry2 = "SELECT
     marker_number,
     trap_loc,
@@ -27,8 +33,33 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     bait ON trap.bait_idbait = bait.idbait
     INNER JOIN
     `location` ON trap.location_idlocation = `location`.idlocation
-    WHERE idlocation == '$location'";
+    WHERE idlocation = '$idlocation'
+    ORDER BY `location`.park ASC
+    ";
+    
+    $r= mysqli_query($conn,$qry2);
+    //echo "this query worked";
 }
+else{
+    $query= 
+    "SELECT
+    marker_number,
+    trap_loc,
+    trap_notes,
+    bait.bait,
+    `location`.park,
+    `location`.region
+    FROM
+    trap 
+    INNER JOIN
+    bait ON trap.bait_idbait = bait.idbait
+    INNER JOIN
+    `location` ON trap.location_idlocation = `location`.idlocation
+    ORDER BY `location`.park ASC";
+
+    $r=mysqli_query ($conn,$query);
+}
+
 
 
 ?>
@@ -38,18 +69,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <div class="searchbar">
   <div class="search-container">
-    <form action="searchtrap.php">
+    <form action="searchtrap.php" method="POST" >
       <!-- <input type="text" placeholder="Search Trap Type" name="search"> -->
-      <input type="text" name="search1" placeholder="Search Trap Type" value="<?php if (isset($_POST['search1'])) echo $_POST['search1']; ?>">
+      <input type="text" name="search1" placeholder="Search Trap Park (Case sensitive)" value="<?php if (isset($_POST['search1'])) echo $_POST['search1']; ?>">
       <button type="submit"><i class="fa fa-search"></i>Search</button>
     </form>
   </div>
 </div>
 
 <br>
-
-<!-- Filter Bar -->
-
 
 <!-- Table of Results -->
 
@@ -65,40 +93,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </tr>
     </thead>
     <tbody>
-
 <?php 
 //$query= "SELECT * FROM trap";
 //$r=mysqli_query ($conn,$query);
-
 ///echo $query;
 ///echo mysqli_error($conn);
 ///$row = mysqli_fetch_assoc($r);
 //echo $row['trap_notes'];
 ///var_dump($r);
 
-$query= 
-"SELECT
-marker_number,
-trap_loc,
-trap_notes,
-bait.bait,
-`location`.park,
-`location`.region
-FROM
-trap 
-INNER JOIN
-bait ON trap.bait_idbait = bait.idbait
-INNER JOIN
-`location` ON trap.location_idlocation = `location`.idlocation
-ORDER BY `location`.park ASC";
-
-
-$r=mysqli_query ($conn,$query);
-
 
 while ($row = mysqli_fetch_assoc($r)){
-    
-    
+
     //$idtraptype = $row['trap_type_idtrap_type'];
     //$querie= "SELECT trap_bait FROM trap_type WHERE idtrap_type=$idtraptype";
     //$result=mysqli_query ($conn,$query);

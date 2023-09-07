@@ -1,7 +1,7 @@
 
 <nav class="navbar">
   <!-- LOGO -->
-  <div class="logo"><img src="trap.png" width="175" height="100"></div>
+  <div class="logo"><img src="trap.png" width="175" height="100"><div class="logoname">Traphub</div></div>
 
   <!-- NAVIGATION MENU -->
   <ul class="nav-links">
