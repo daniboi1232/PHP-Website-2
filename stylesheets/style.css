@@ -52,7 +52,11 @@
     padding-bottom: 10%;
     float: right;
   }
-
+  .logo:hover{
+    scale: 1.02;
+    transition: all 0.3s ease;
+    background-color: #26420d;
+  }
   
   /* NAVBAR MENU */
   .menu {
@@ -63,8 +67,9 @@
   }
   
   .menu li:hover {
-    background-color: #365d11;
+    background-color: #26420d;
     border-radius: 5px;
+    scale: 1.05;
     transition: 0.3s ease;
   }
   
@@ -78,7 +83,7 @@
   }
   
   .dropdown {
-    background-color: #365d11;
+    background-color: #26420d;
     padding: 1em 0;
     position: absolute; /*WITH RESPECT TO PARENT*/
     display: none;
@@ -97,7 +102,7 @@
   }
   
   .dropdown li:hover {
-    background-color: #365d11;
+    background-color: #162607;
   }
   
   .services:hover .dropdown {
@@ -120,11 +125,11 @@ input[type=checkbox] {
   }
   
   /* APPLYING MEDIA QUERIES */
-  @media (max-width: 768px) {
+  @media screen and (max-width: 900px) {
    .menu {
       display:none;
       position: absolute;
-      background-color:#365d11;
+      background-color:#26420d;
       right: 0;
       left: 0;
       text-align: center;
@@ -133,7 +138,7 @@ input[type=checkbox] {
   
     .menu li:hover {
       display: inline-block;
-      background-color:#365d11;
+      background-color:#26420d;
       transition: 0.3s ease;
     }
   
@@ -156,7 +161,7 @@ input[type=checkbox] {
     }
   
     .dropdown li:hover {
-      background-color: #365d11;
+      background-color: #26420d;
     }
   }
 
@@ -297,7 +302,7 @@ input[type=checkbox] {
   background: #ccc;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 900px) {
   .searchbar .search-container {
     float: none;
   }
@@ -325,8 +330,9 @@ input[type=checkbox] {
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
   float: left;
   /* width:70%; */ 
-  margin-left:15%; 
-  margin-right:15%;
+  width: 40%;
+  margin-left: 5%;
+  margin-right: 5%;
 }
 
 .table_style thead tr {
@@ -352,8 +358,13 @@ input[type=checkbox] {
   border-bottom: 2px solid #162607;
 }
 
-
-
+@media screen and (max-width: 1150px) {
+  
+  .table_style{
+    width: 90%;
+    
+  }
+}
 
 
 /*  FOOTER  */
@@ -430,6 +441,11 @@ input[type=checkbox] {
 
 
   /*  Insert Page Css  */
+  .insertheader {
+    margin-top: 2.5%;
+    margin-left: 4%;
+  }
+
   .container {
     box-sizing: border-box;
   }
@@ -444,7 +460,7 @@ input[type=checkbox] {
   
   label {
     padding: 12px 12px 12px 0;
-    display: inline-block;
+    display: flex;
   }
   
   input[type=submit] {
@@ -454,7 +470,9 @@ input[type=checkbox] {
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    float: right;
+    float: left;
+    margin-top: 2%;
+    margin-right: 30%;
   }
   
   input[type=submit]:hover {
@@ -463,14 +481,13 @@ input[type=checkbox] {
   
   .container {
     border-radius: 5px;
-    
     padding: 20px;
   }
   
   .col-25 {
     float: left;
     width: 25%;
-    margin-top: 6px;
+    margin-top: 0px;
   }
   
   .col-75 {
@@ -482,12 +499,12 @@ input[type=checkbox] {
   /* Bait and Location insert form style */
   .insert-col-75 {
     float: left;
-    width: 50%;
+    width: 45%;
   }
   .insert-col-25 {
     float: left;
-    width: 5%;
-    margin-left: 15px;
+    width: 45%;
+    margin-left: 0px;
   }
 
   
@@ -498,18 +515,32 @@ input[type=checkbox] {
     clear: both;
   }
   
-  /* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
-  @media screen and (max-width: 600px) {
-    .col-25, .col-75, input[type=submit] {
+  /* Responsive layout - when the screen is less than 1150px wide, make the two blocks stack on top of each other instead of next to each other */
+  @media screen and (max-width: 1150px) {
+    .col-25, .col-75{
       width: 100%;
       margin-top: 0;
+    }
+    .insertheader{
+      width: 90%;
+      text-align: center;
+    }
+    .insert-col-75, .insert-col-25{
+      width: 70%;
+      margin-left: 15%;
+    }
+    .submitbutton {
+      width: 70%;
+      margin-top: 10%;
+      margin-left: 15%;
+      margin-right: auto;
     }
   }
 
 
-/*  Home page text */
+/*  Home page and About page text and images*/
 
-.homepage_text{
+.mainpage_text{
   margin-right: 9%;
   margin-left:9%;
 }
@@ -518,7 +549,7 @@ input[type=checkbox] {
   align-items: center;
 }
 
-.homepage_text h1{
+.mainpage_text h1{
   margin-top: 2%;
   margin-bottom: 2%;
   text-align: center;
@@ -532,14 +563,100 @@ input[type=checkbox] {
   font-size: 125%;
   float: left;
 }
-
-.img {
+/* Bigscreen and smallscreen - two separate images for when browser gets too small */
+.img-home-bigscreen{
   float: right; 
-  /*object-position: center top;*/
+  margin-right: 5%;
 }
-@media (max-width: 767px) {
-  .text, .img {
+/* Scaling when user hovers over images */
+.img-home-bigscreen:hover, .img-home-smallscreen:hover{
+  scale: 1.02;
+  transition: all 0.3s ease;
+}
+.img-home-smallscreen{
+  display: none;
+  margin-top: 5%;
+  /* margin-left: auto; */
+  /* margin-right: auto; */
+  width: 50%;
+}
+
+@media screen and (max-width: 1150px) {
+  .text {
     float: none;
     width: 100%;
   }
+  .img-home-bigscreen{
+    /*float: none;
+    width: 100%;
+    height:auto;
+    object-fit: contain;*/
+    display: none;
+  }
+  .img-home-smallscreen{
+    /* display: block; */
+    display: flex;
+    align-items: center;
+  }
+}
+
+.textimg-about {
+  display: flex;
+  align-items: center;
+}
+.text-about{
+  text-align:justify;
+  margin-right: 5%;
+  margin-left: 11%;
+  font-size: 125%;
+  float: right;
+}
+
+.img-about-bigscreen {
+  float: left; 
+  margin-left: 10%;
+  max-width: 500;
+}
+.img-about-bigscreen:hover, .img-about-smallscreen:hover{
+  scale: 1.02;
+  transition: all 0.3s ease;
+}
+.img-about-smallscreen {
+  display: none;
+  margin-top: 5%;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+/* for accessibility with adjustments in screen sizing for when the screen is less than 1100 pixels*/
+
+@media screen and (max-width: 1100px) {
+  .text-about{
+    float: none;
+    width: 100%;
+  }
+  .img-about-bigscreen{
+    /*width:max-content;
+    float: none;
+    width: 100%;
+    margin-top: 500px;
+    position: bottom;*/
+    display: none;
+  }
+  .img-about-smallscreen{
+    display: block;
+  }
+}
+
+/* error message */
+
+.error-msg {
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 2%;
+  /* margin-left: 1%; */
+  padding-left: 20px;
+  border-radius: 5px;
+  background-color: red;
 }

@@ -13,6 +13,6 @@
             <li class="list-inline-item"><a href="terms.php">Terms</a></li>
             <li class="list-inline-item"><a href="priv.php">Privacy Policy</a></li>
         </ul>
-        <p class="copyright">Company Name © 2018</p>
+        <p class="copyright">Company Name © 2023</p>
     </footer>
 </div>

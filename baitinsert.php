@@ -86,6 +86,8 @@ while ($row = mysqli_fetch_assoc($r)){
 
 
 <!-- End of PHP and Start of HTML Form-->
+
+<h1 class="insertheader" >Insert New Bait</h1>
 <br>
 <div class="container">
   <form action="bait.php" method="POST">
@@ -107,7 +109,7 @@ while ($row = mysqli_fetch_assoc($r)){
     </div>
   </div>
   <div class="row">
-    <input type="submit" value="Submit" name="submit">
+    <input type="submit" value="Submit" name="submit" class="submitbutton">
   </div>
   </form>
 </div>

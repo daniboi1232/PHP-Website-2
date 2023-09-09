@@ -23,48 +23,56 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     //var_dump($conn);
     // --- FIXED --- broken here - not getting through the next command 
     $result = mysqli_query($conn,$qry);
-
-    if (isset($result)) { if (mysqli_num_rows($result) > 0) {
-         echo 'This Trap Number is Already Registered';
-         
-    }
-    else {
-      $qry2 = "SELECT `idlocation` FROM `location` WHERE `region` = '$region' AND `park` = '$park'";
-      //$qry2="SELECT * FROM location WHERE $region == `region` AND $park == `park`"; - messed up query
-      //echo $qry2;
-      $r2 = mysqli_query($conn,$qry2);
-      
-      //var_dump($r2);
-      //echo $r2;
-      $row = mysqli_fetch_assoc($r2);
-
-      //echo $row;      
-      if (isset($r2)) { if (mysqli_num_rows($r2) > 0) {
-        //write insert code
-        //$qry3 = "SELECT `idlocation` FROM `location` WHERE `park"
-        //echo reset($row);
-        $idlocation = reset($row);
-        $qry3 = "INSERT INTO `trap`(`marker_number`, `trap_loc`, `trap_notes`, `location_idlocation`, `bait_idbait`, `user_iduser`) 
-        VALUES ('$markernumber','$traploc','$notes','$idlocation','$bait','1')";
-        //echo $qry3;
-        $r3 = mysqli_query($conn,$qry3);
-        //var_dump($r3);
-        //echo $r3;
-        echo "<b>Trap Has Been Successfully Inserted<b>";
-      }
-      else {
-        echo '<b>Please Select A the Region which Matches the Park<b>';
-
-      } 
-  
-      }
-    } 
+    if (is_numeric($markernumber)){
+      if (is_numeric($traploc)) {
+        if (isset($result)) { if (mysqli_num_rows($result) > 0) {
+             echo 'This Trap Number is Already Registered';
+             
+        }
+        else {
+          $qry2 = "SELECT `idlocation` FROM `location` WHERE `region` = '$region' AND `park` = '$park'";
+          //$qry2="SELECT * FROM location WHERE $region == `region` AND $park == `park`"; - messed up query
+          //echo $qry2;
+          $r2 = mysqli_query($conn,$qry2);
+          
+          //var_dump($r2);
+          //echo $r2;
+          $row = mysqli_fetch_assoc($r2);
     
-    }
-    else { 
-        echo 'not found';
+          //echo $row;      
+          if (isset($r2)) { if (mysqli_num_rows($r2) > 0) {
+            //write insert code
+            //$qry3 = "SELECT `idlocation` FROM `location` WHERE `park"
+            //echo reset($row);
+            $idlocation = reset($row);
+            $qry3 = "INSERT INTO `trap`(`marker_number`, `trap_loc`, `trap_notes`, `location_idlocation`, `bait_idbait`, `user_iduser`) 
+            VALUES ('$markernumber','$traploc','$notes','$idlocation','$bait','1')";
+            //echo $qry3;
+            $r3 = mysqli_query($conn,$qry3);
+            //var_dump($r3);
+            //echo $r3;
+            echo "<b>Trap Has Been Successfully Inserted<b>";
+          }
+          else {
+            echo '<b>Please Select A the Region which Matches the Park<b>';
+    
+          } 
+      
+          }
+        } 
         
+        }
+        else { 
+            echo 'not found'; 
+        }
+      } else {
+        echo "<div class='error-msg'>Trap Location MUST be a 8 figure number!</div>";
+      }
+    } else {
+      echo "<div class='error-msg'>Marker Number MUST be a Number!</div>";
     }
+
+
     
     
 
@@ -93,7 +101,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <form action="insertnewtrap.php" method="POST">
     <div class="row">
       <div class="col-25">
-        <label for="markernumber">Marker Number:</label>
+        <label for="markernumber"><b>Marker Number:</b></label>
       </div>
       <div class="col-75">
         <input type="text" name="markernumber" placeholder="Marker Number.." value="<?php if (isset($_POST['markernumber'])) echo $_POST['markernumber']; ?>">
@@ -101,7 +109,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </div>
     <div class="row">
       <div class="col-25">
-        <label for="traploc">8 Figure Grid Reference</label>
+        <label for="traploc"><b>8 Figure Grid Reference</b></label>
       </div>
       <div class="col-75">
         <input type="text" name="traploc" value="<?php if (isset($_POST['traploc'])) echo $_POST['traploc']; ?>" placeholder="8 Figure Grid Reference...">
@@ -109,7 +117,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </div>
     <div class="row">
       <div class="col-25">
-        <label for="region">Trap Line Region:</label>
+        <label for="region"><b>Trap Line Region:</b></label>
       </div>
       <div class="col-75">
         <select  name="region">
@@ -135,7 +143,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </div>
     <div class="row">
       <div class="col-25">
-        <label for="trapregion">Trap Line Park:</label>
+        <label for="trapregion"><b>Trap Line Park:</b></label>
       </div>
       <div class="col-75">
         <select  name="park">
@@ -161,7 +169,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </div>
     <div class="row">
       <div class="col-25">
-        <label for="bait">Trap Bait Used:</label>
+        <label for="bait"><b>Trap Bait Used:</b></label>
       </div>
       <div class="col-75">
         <select  name="bait">
@@ -187,7 +195,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </div>
     <div class="row">
       <div class="col-25">
-        <label for="notes">Trap Notes:</label>
+        <label for="notes"><b>Trap Notes:</b></label>
       </div>
       <div class="col-75">
         <textarea name="notes" placeholder="E.g. Beside a young Lancewood..." style="height:200px" value="<?php if (isset($_POST['notes'])) echo $_POST['notes']; ?>" ></textarea>

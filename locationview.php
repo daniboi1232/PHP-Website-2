@@ -80,8 +80,8 @@ while ($row = mysqli_fetch_assoc($r)) {
 ?>
     </tbody>
 </table>
-
-
+<!--  Heading Text  -->
+<h1 class="insertheader" >Insert New Location</h1>
 <!-- End of PHP and Start of HTML Form-->
 <br>
 <div class="container">
@@ -104,7 +104,7 @@ while ($row = mysqli_fetch_assoc($r)) {
     </div>
   </div>
   <div class="row">
-    <input type="submit" value="Submit" name="submit">
+    <input type="submit" value="Submit" name="submit" class="submitbutton" >
   </div>
   </form>
 </div>

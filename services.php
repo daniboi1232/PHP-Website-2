@@ -15,7 +15,7 @@ include ('nav.php');
 
 
 ?>
-<div class="bodytext">
+<div class="mainpage_text">
     <h1>Options:</h1>
     <p><a href="insertnewtrap.php">Insert New Trap</a></p>
     <p><a href="searchtrap.php">Search For A Trap</a></p>
